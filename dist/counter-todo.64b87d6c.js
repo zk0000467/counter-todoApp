@@ -207,11 +207,11 @@
       });
     }
   }
-})({"9RH0m":[function(require,module,exports,__globalThis) {
+})({"gy7p3":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 57795;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -27601,6 +27601,6 @@ $RefreshReg$(_c, "Todo");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./Todo.css":"4nwi8","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"4nwi8":[function() {},{}],"6n0o6":[function() {},{}]},["9RH0m","eM1fv"], "eM1fv", "parcelRequire1bc6", {}, null, null, "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","./Todo.css":"4nwi8","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"4nwi8":[function() {},{}],"6n0o6":[function() {},{}]},["gy7p3","eM1fv"], "eM1fv", "parcelRequire1bc6", {}, null, null, "http://localhost:57795")
 
 //# sourceMappingURL=counter-todo.64b87d6c.js.map
