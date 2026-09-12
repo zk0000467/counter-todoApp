@@ -1,4 +1,4 @@
- Overview
+
 A simple web application built using HTML, CSS, and JavaScript that allows users to:
 
 Increment and decrement a counter
