@@ -1,29 +1,53 @@
 import { useState } from "react";
 import "./Todo.css";
 
+const STORAGE_KEY = "counter-todo::todos";
+
+function loadTodos() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return [
+        { id: 1, text: "Learn useState", done: true },
+        { id: 2, text: "Handle click events", done: false },
+      ];
+    }
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function Todo() {
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState([
-    { id: 1, text: "Learn useState", done: true },
-    { id: 2, text: "Handle click events", done: false },
-  ]);
+  const [todos, setTodos] = useState(loadTodos);
+
+  function persist(next) {
+    setTodos(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {
+      // ignore storage errors
+    }
+  }
 
   function addTodo(e) {
     e.preventDefault();
     const trimmed = text.trim();
     if (!trimmed) return;
-    setTodos((t) => [...t, { id: Date.now(), text: trimmed, done: false }]);
+    persist((t) => [...t, { id: Date.now(), text: trimmed, done: false }]);
     setText("");
   }
 
   function toggleTodo(id) {
-    setTodos((t) =>
+    persist((t) =>
       t.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo))
     );
   }
 
   function deleteTodo(id) {
-    setTodos((t) => t.filter((todo) => todo.id !== id));
+    persist((t) => t.filter((todo) => todo.id !== id));
   }
 
   return (
