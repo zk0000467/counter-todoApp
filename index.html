@@ -7,9 +7,148 @@
     <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f6fa;
+        color: #2d3436;
+        min-height: 100vh;
+        padding: 24px;
+      }
+      .app { max-width: 560px; margin: 0 auto; }
+      .app h1 { text-align: center; margin-bottom: 24px; color: #636e72; }
+
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      }
+      .card h2 { font-size: 18px; margin: 0 0 12px; color: #636e72; }
+
+      .counter-value {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 700;
+        margin: 8px 0 16px;
+      }
+      .counter-controls { display: flex; gap: 8px; }
+      .counter-controls button {
+        flex: 1; padding: 10px; font-size: 16px; border: none; border-radius: 8px;
+        background: #0984e3; color: #fff; cursor: pointer;
+      }
+      .counter-controls button:hover { background: #0773c4; }
+      .counter-controls button.reset { background: #dfe6e9; color: #2d3436; }
+      .counter-controls button.reset:hover { background: #ced6e0; }
+
+      .todo-form { display: flex; gap: 8px; margin-bottom: 16px; }
+      .todo-form input {
+        flex: 1; padding: 10px 12px; font-size: 15px; border: 1px solid #ddd; border-radius: 8px;
+      }
+      .todo-form button {
+        padding: 10px 16px; font-size: 15px; border: none; border-radius: 8px;
+        background: #0984e3; color: #fff; cursor: pointer;
+      }
+      .todo-form button:hover { background: #0773c4; }
+
+      .todo-list { list-style: none; }
+      .todo-item {
+        display: flex; align-items: center; gap: 10px; padding: 10px 0;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .todo-item:last-child { border-bottom: none; }
+      .todo-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+      .todo-text { flex: 1; font-size: 15px; cursor: pointer; }
+      .todo-text.done { text-decoration: line-through; color: #b2bec3; }
+      .todo-delete {
+        background: none; border: none; color: #d63031; font-size: 22px;
+        cursor: pointer; padding: 0 6px; border-radius: 4px; line-height: 1;
+      }
+      .todo-delete:hover { background: #ffeaea; }
+      .empty { text-align: center; color: #b2bec3; padding: 16px 0; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="text/babel" data-type="module" src="./src/App.jsx"></script>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function Counter() {
+        const [count, setCount] = useState(0);
+        return React.createElement("div", { className: "card" },
+          React.createElement("h2", null, "Counter"),
+          React.createElement("p", { className: "counter-value" }, count),
+          React.createElement("div", { className: "counter-controls" },
+            React.createElement("button", { onClick: () => setCount(c => c - 1) }, "−"),
+            React.createElement("button", { className: "reset", onClick: () => setCount(0) }, "Reset"),
+            React.createElement("button", { onClick: () => setCount(c => c + 1) }, "+")
+          )
+        );
+      }
+
+      function Todo() {
+        const [text, setText] = useState("");
+        const [todos, setTodos] = useState([
+          { id: 1, text: "Learn useState", done: true },
+          { id: 2, text: "Handle click events", done: false },
+        ]);
+
+        function addTodo(e) {
+          e.preventDefault();
+          const trimmed = text.trim();
+          if (!trimmed) return;
+          setTodos(t => [...t, { id: Date.now(), text: trimmed, done: false }]);
+          setText("");
+        }
+        function toggleTodo(id) {
+          setTodos(t => t.map(td => td.id === id ? { ...td, done: !td.done } : td));
+        }
+        function deleteTodo(id) {
+          setTodos(t => t.filter(td => td.id !== id));
+        }
+
+        return React.createElement("div", { className: "card" },
+          React.createElement("h2", null, "Todo"),
+          React.createElement("form", { className: "todo-form", onSubmit: addTodo },
+            React.createElement("input", {
+              type: "text", placeholder: "Add a task...", value: text,
+              onChange: e => setText(e.target.value)
+            }),
+            React.createElement("button", { type: "submit" }, "Add")
+          ),
+          React.createElement("ul", { className: "todo-list" },
+            todos.length === 0
+              ? React.createElement("li", { className: "empty" }, "No tasks yet.")
+              : todos.map(td => React.createElement("li", { key: td.id, className: "todo-item" },
+                  React.createElement("input", {
+                    type: "checkbox", checked: td.done,
+                    onChange: () => toggleTodo(td.id)
+                  }),
+                  React.createElement("span", {
+                    className: "todo-text" + (td.done ? " done" : ""),
+                    onClick: () => toggleTodo(td.id)
+                  }, td.text),
+                  React.createElement("button", {
+                    className: "todo-delete", onClick: () => deleteTodo(td.id),
+                    "aria-label": "Delete"
+                  }, "×")
+                ))
+          )
+        );
+      }
+
+      function App() {
+        return React.createElement("div", { className: "app" },
+          React.createElement("h1", null, "Counter + Todo"),
+          React.createElement(Counter),
+          React.createElement(Todo)
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+    </script>
   </body>
 </html>
