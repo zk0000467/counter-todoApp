@@ -1,0 +1,182 @@
+.counter-card {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 8px #0000000f;
+}
+
+.counter-card h2 {
+  color: #636e72;
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.counter-value {
+  text-align: center;
+  margin: 8px 0 16px;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.counter-controls {
+  gap: 8px;
+  display: flex;
+}
+
+.counter-controls button {
+  color: #fff;
+  cursor: pointer;
+  background: #0984e3;
+  border: none;
+  border-radius: 8px;
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  transition: background .15s;
+}
+
+.counter-controls button:hover {
+  background: #0773c4;
+}
+
+.counter-controls button.reset {
+  color: #2d3436;
+  background: #dfe6e9;
+}
+
+.counter-controls button.reset:hover {
+  background: #ced6e0;
+}
+
+.todo-card {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 8px #0000000f;
+}
+
+.todo-card h2 {
+  color: #636e72;
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.todo-form {
+  gap: 8px;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.todo-form input {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.todo-form button {
+  color: #fff;
+  cursor: pointer;
+  background: #0984e3;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 15px;
+}
+
+.todo-form button:hover {
+  background: #0773c4;
+}
+
+.todo-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-item {
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  display: flex;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.todo-text {
+  cursor: pointer;
+  flex: 1;
+  font-size: 15px;
+}
+
+.todo-text.done {
+  color: #b2bec3;
+  text-decoration: line-through;
+}
+
+.todo-delete {
+  color: #d63031;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  padding: 0 6px;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.todo-delete:hover {
+  background: #ffeaea;
+}
+
+.empty {
+  text-align: center;
+  color: #b2bec3;
+  padding: 16px 0;
+}
+
+:root {
+  --bg: #f5f6fa;
+  --card: #fff;
+  --text: #2d3436;
+  --muted: #636e72;
+  --accent: #0984e3;
+  --border: #ddd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+}
+
+.app {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.app h1 {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+/*# sourceMappingURL=counter-todo.aa436662.css.map */
